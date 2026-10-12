@@ -1,94 +1,73 @@
 import os
+import sys
 import time
 
-def flag():
-    print("\033[41m" + " " * 40 + "\033[0m")  # красный
-    print("\033[47m" + " " * 40 + "\033[0m")  # белый
+# Включаем поддержку ANSI-кодов в консоли
+os.system("")
 
-    print("\033[44m" + " " * 40 + "\033[0m")  # синий
-    print("\033[44m" + " " * 40 + "\033[0m")  # синий
+# Коды для изменения цвета фона в консоли
+ESC = "\033["
+RESET = ESC + "0m"
+RED = ESC + "41m"
+WHITE = ESC + "47m"
+BLUE = ESC + "44m"
+BLACK = ESC + "40m"
 
-    print("\033[47m" + " " * 40 + "\033[0m")  # белый
-    print("\033[41m" + " " * 40 + "\033[0m")  # красный
+CLEAR = "cls"
 
+os.system(CLEAR)
+print("1. Флаг Таиланда\n")
+# Список цветов полос флага
+flag = [RED, WHITE, BLUE, BLUE, WHITE, RED]
+# Выводим каждую полосу нужным цветом
+for color in flag:
+    print(color + " " * 36 + RESET)
+input("\nEnter - дальше")
 
+motif = [
+    "      ##      ",
+    "     #  #     ",
+    "   ##    ##   ",
+    "###        ###",
+    "              ",
+]
+# Повторяем узор 3 раза по вертикали
+for i in range(3):
+    for line in motif:
+        result = ""
+        # Повторяем строку 3 раза по горизонтали
+        for ch in line * 3:
+            if ch == "#":
+                result += BLACK + "  "
+            else:
+                result += WHITE + "  "
+        print(result + RESET)
+input("Enter - дальше")
 
-
-def animation():
-    # Кадр 1
+# Создаём 4 кадра анимации
+for frame in range(4):
     os.system("cls")
-    print("*")
+    # Выводим полосы флага со смещением вправо
+    for color in flag:
+        print("\033[" + str(frame * 10 + 1) + "C" + color + " " * 20 + RESET)
     time.sleep(0.5)
-    # Кадр 2
-    os.system("cls")
-    print("   *")
-    time.sleep(0.5)
-    # Кадр 3
-    os.system("cls")
-    print("      *")
-    time.sleep(0.5)
-    # Кадр 4
-    os.system("cls")
-    print("         *")
-    time.sleep(0.5)
-
-
-
-def diagram():
-    file = open("sequence.txt", "r")
-    text = file.read()
-    file.close()
-    text_numbers = text.split()
-    numbers = []
-    for number in text_numbers:
-        numbers.append(float(number))
-    more = 0
-    less = 0
-    for number in numbers:
-        if number < 0:
-            continue
-        if number > 5:
-            more = more + 1
-        elif number < 5:
-            less = less + 1
-    total = more + less
-
-    if total == 0:
-        print("Подходящих чисел нет")
-        return
-
-    # Считаем проценты
-    more_percent = more / total * 100
-    less_percent = less / total * 100
-
-    print("Чисел больше 5:", more)
-    print("Чисел меньше 5:", less)
-
-    print("Больше 5:", round(more_percent, 1), "%")
-    print("Меньше 5:", round(less_percent, 1), "%")
-
-    print()
-    print("Диаграмма:")
-
-    more_bar = int(more_percent / 5)
-    less_bar = int(less_percent / 5)
-
-    print("> 5:", "#" * more_bar)
-    print("< 5:", "#" * less_bar)
-
-print("Флаг Таиланда:")
-flag()
-
-print()
-
-print("Узор:")
-
-
-input("\nНажми Enter для запуска анимации")
-
-animation()
+input("Enter - дальше")
 
 os.system("cls")
+numbers = open("sequence.txt").read().split()
 
-print("Обработка sequence.txt:")
-diagram()
+more = 0
+less = 0
+for n in numbers:
+    n = float(n)
+    if n > 5:
+        more += 1
+    elif 0 <= n < 5:
+        less += 1
+
+p_more = round(more / (more + less) * 100)
+p_less = 100 - p_more
+
+print("Больше 5:", RED + " " * (p_more // 2) + RESET, p_more, "%")
+print("Меньше 5:", BLUE + " " * (p_less // 2) + RESET, p_less, "%")
+input("Enter - дальше")
