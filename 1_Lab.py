@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 
 # Включаем поддержку ANSI-кодов в консоли
@@ -24,12 +23,15 @@ for color in flag:
     print(color + " " * 36 + RESET)
 input("\nEnter - дальше")
 
+os.system("cls")
+
 motif = [
-    "      ##      ",
-    "     #  #     ",
-    "   ##    ##   ",
-    "###        ###",
-    "              ",
+    "       #       ",
+    "      # #      ",
+    "     #   #     ",
+    "   ##     ##   ",
+    "###         ###",
+    "               ",
 ]
 # Повторяем узор 3 раза по вертикали
 for i in range(3):
