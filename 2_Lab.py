@@ -67,7 +67,10 @@ for book in books:
     key = (book['Название'], book['Автор'])
     popularity[key] = popularity.get(key, 0) + int(book['Кол-во выдач'])
 
-top = sorted(popularity.items(), key=lambda item: item[1], reverse=True)[:20]
+def get_count(item):
+    return item[1]
+
+top = sorted(popularity.items(), key=get_count, reverse=True)[:20]
 print('\nСамые популярные 20 книг:')
 for i, ((title, author), count) in enumerate(top, 1):
     print(f"{i}. {title} - {author} ({count} выдач)")
