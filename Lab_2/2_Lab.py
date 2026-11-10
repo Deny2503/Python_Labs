@@ -35,6 +35,7 @@ with open('bibliography.txt', 'w', encoding='utf-8') as f:
         f.write(f"{i}. {book['Автор']}. {book['Название']} - {year}\n")
 print('\nСписок ссылок сохранён в bibliography.txt')
 
+# Доп задание, Средний показатель value
 with open('currency.xml', 'rb') as f:
     data = f.read()
 try:
@@ -74,3 +75,5 @@ top = sorted(popularity.items(), key=get_count, reverse=True)[:20]
 print('\nСамые популярные 20 книг:')
 for i, ((title, author), count) in enumerate(top, 1):
     print(f"{i}. {title} - {author} ({count} выдач)")
+
+    
