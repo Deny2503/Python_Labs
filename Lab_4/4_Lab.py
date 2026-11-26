@@ -127,5 +127,4 @@ def main():
     print(f"Всего комбинаций: {len(combos)}")
 
 
-if __name__ == "__main__":
-    main()
+main()

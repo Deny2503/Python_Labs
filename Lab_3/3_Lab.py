@@ -101,7 +101,7 @@ canvas = tk.Canvas(window, width=440, height=827)
 canvas.pack()
 
 # картинка на фон
-picture = tk.PhotoImage(file="image.png")
+picture = tk.PhotoImage(file="C:\\Users\\User\\OneDrive\\Рабочий стол\\Python_Labs\\Lab_3\\image.png")
 canvas.create_image(0, 0, image=picture, anchor="nw")
 
 # надпись
